@@ -12,17 +12,17 @@ export const ContactsList = () => {
   
 
   return (
-    <ul className={css.contacts__list}>
+    <ul className={css.list}>
       {contacts.map(contact => (
-        <li key={contact.id}>
-          <p>{contact.name}</p>
-          <p>{contact.number}</p>
+        <li className={css.item} key={contact.id}>
+          <p className={css.contact_name}>{contact.name}</p>
+          <p className={css.contact_number}>{contact.number}</p>
           <button
             onClick={() => dispatch(deleteContact(contact.id))}
-            className={css.contacts__btn}
+            className={css.button}
             type="button"
           >
-            Delete
+            X
           </button>
         </li>
       ))}
