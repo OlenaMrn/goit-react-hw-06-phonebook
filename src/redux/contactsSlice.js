@@ -45,38 +45,32 @@ const contactsSlice = createSlice({
   },
 });
 
-// Persist setup
 const persistConfig = {
   key: 'list',
   storage,
 };
+
 const persistedContactsReducer = persistReducer(
   persistConfig,
   contactsSlice.reducer
 );
 
-// Actions
-// export const { addContact, deleteContact } = contactsSlice.actions;
-
-// Reducer
-export const contactsReducer = persistedContactsReducer;
-
-// Selectors
-// export const getContactsList = state => state.contacts.items;
-
-
 export const { addContact, deleteContact } = contactsSlice.actions;
-
-// export const contactsReducer = contactsSlice.reducer;
-
+export const contactsReducer = persistedContactsReducer;
 export const getContactsList = state => state.contacts.items;
 
-// export const getContacts = store => store.contacts;
-// export const getFilteredContacts = ({ contacts = [], filter }) => {
-//   const normalizedFilterValue = filter.toLowerCase();
-//   const filteredContacts = contacts.filter(({ name }) => {
-//     const normalizedName = name.toLowerCase();
-//     return normalizedName.includes(normalizedFilterValue);
-//   });
-//   return filteredContacts;
-// };
+export const getFilteredContacts = state => {
+  const contacts = getContactsList(state);
+  const filter = state.filter.value;
+
+  const normalizedFilterValue = filter.toLowerCase();
+  const filteredContacts = contacts.filter(({ name }) => {
+    if (name && typeof name === 'string') {
+      const normalizedName = name.toLowerCase();
+      return normalizedName.includes(normalizedFilterValue);
+    }
+    return false;
+  });
+
+  return filteredContacts;
+};
