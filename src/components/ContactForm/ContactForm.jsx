@@ -11,15 +11,6 @@ export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // const handleChange = event => {
-  //   const { name, value } = event.currentTarget;
-  //   if (name === 'name') {
-  //     setName(value);
-  //   } else if (name === 'number') {
-  //     setNumber(value);
-  //   }
-  // };
-
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -27,11 +18,6 @@ export const ContactForm = () => {
     setName('');
     setNumber('');
   };
-
-  // const reset = () => {
-  //   setName('');
-  //   setNumber('');
-  // };
 
   return (
     <div className={css.wrap}>
@@ -69,5 +55,3 @@ export const ContactForm = () => {
     </div>
   );
 };
-
-
